@@ -1,0 +1,21 @@
+[scripts]
+dev = "PIPENV_DOTENV_LOCATION=dotenv/.env.dev pipenv run python -m scripts.run --mode=dev"
+prod = "PIPENV_DOTENV_LOCATION=dotenv/.env.prod pipenv run python -m scripts.run --mode=prod"
+indocker-up = "python -m scripts.run --mode=prod"
+
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+pymongo = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+fire = "*"
+
+[dev-packages]
+debug-tools = "*"
+
+[requires]
+python_version = "3.9"
