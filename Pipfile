@@ -19,6 +19,9 @@ pydantic = {extras = ["email"], version = "*"}
 devtools = {extras = ["pygments"], version = "*"}
 
 [dev-packages]
+pytest = "*"
+pytest-asyncio = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.9"
