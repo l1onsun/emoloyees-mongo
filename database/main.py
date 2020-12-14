@@ -2,7 +2,6 @@ from config.environ import get_env
 
 from functools import lru_cache
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-from devtools import debug
 
 
 @lru_cache
