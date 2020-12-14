@@ -11,23 +11,32 @@
 * Пример запроса:    
 `http://localhost:8081/employee?company=Google&company=Twitter&job=developer`   
 * В качестве MongoDB драйвера использовал `motor`
+* Для управления зависимостями и сокращения команд использовал [`pipenv`](https://github.com/pypa/pipenv)
 
 ### Запуск в docker-compsoe
-С помошью [`pipenv`](https://github.com/pypa/pipenv) скриптов:
+С помощью [`pipenv`](https://github.com/pypa/pipenv) скриптов:
 ```
 $ pipenv run docker build up
 ```
-Альтернативно:
+Альтернативно без `pipenv`:
 ```
 $ docker-compose --env-file dotenv/.evn.docker build
 $ docker-compose --env-file dotenv/.evn.docker up
 ```
 Тестирование запущенного контейнера
 ```
-# todo
+# pipenv run docker pytest --test-running
+```
+Без `pipenv`:
+```
+$ python -c "from scripts.run import MainRunner as m; m('docker').pytest(True)"
 ```
 ### Запуск локально
 ```
 $ pipenv run dev database drop seed create-index
 $ pipenv run dev start
+```
+Тесты:
+```
+$ pipenv run dev pytest --test-running
 ```
