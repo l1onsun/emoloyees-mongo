@@ -12,9 +12,15 @@
 `http://localhost:8081/employee?company=Google&company=Twitter&job=developer`   
 * В качестве MongoDB драйвера использовал `motor`
 * Для управления зависимостями и сокращения команд использовал [`pipenv`](https://github.com/pypa/pipenv)
+### Установка библиотек
+Через `pipenv` (рекомендуется):
+```
+$ pipenv sync --dev
+```
+Иначе через `requirements.txt` и `requirements_dev.txt`
 
 ### Запуск в docker-compsoe
-С помощью [`pipenv`](https://github.com/pypa/pipenv) скриптов:
+С помощью `pipenv` скриптов:
 ```
 $ pipenv run docker build up
 ```
