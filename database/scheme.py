@@ -3,8 +3,10 @@ from datetime import datetime
 from typing import Literal
 
 
+
+
 # constants
-class Scheme:
+class Constants:
     employee = "employee"
     name = "name"
     email = "email"

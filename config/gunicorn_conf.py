@@ -2,8 +2,7 @@ from pydantic import BaseSettings, Field
 from typing import Optional
 import multiprocessing
 
-class GunicornSettings(BaseSettings):
-    # gunicorn
+class GunicornEnvSettings(BaseSettings):
     workers_per_core: int = Field(1, env="GUNICORN_WORKERS_PER_CORE")
     max_workers: int = Field(2, env="GUNICORN_MAX_WORKERS")
     web_concurrency: Optional[int] = Field(None, env="GUNICORN_WEB_CONCURRENCY")
@@ -12,7 +11,7 @@ class GunicornSettings(BaseSettings):
     timeout: int = Field(120, env="GUNICORN_TIMEOUT")
     keepalive: int = Field(5, env="GUNICORN_KEEP_ALIVE")
 
-gunicorn_env = GunicornSettings()
+gunicorn_env = GunicornEnvSettings()
 
 def count_workers():
     if gunicorn_env.web_concurrency:
@@ -30,4 +29,4 @@ def count_workers():
 bind = f"{gunicorn_env.host}:{gunicorn_env.port}"
 workers = count_workers()
 timeout = gunicorn_env.timeout
-keepalive = gunicorn_env.keepalive
+keepalive = gunicorn_env.keepalive # not a typo

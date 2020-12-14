@@ -9,7 +9,7 @@ def get_env():
 
 
 class EnvSettings(BaseSettings):
-    allow_drop_tables: bool = Field(False, env='ALLOW_DROP_TABLES')
+    # allow_drop_tables: bool = Field(False, env='ALLOW_DROP_TABLES')
 
     mongo_db: str
     mongo_user: str
@@ -22,6 +22,4 @@ class EnvSettings(BaseSettings):
 
     # mongo_seed_collection: str
     mongo_seed_json: str
-    # postgres_dsn: PostgresDsn = None
-    # postgres_asyncpg_dsn: PostgresAsyncDsn = None
 
