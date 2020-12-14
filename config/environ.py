@@ -1,7 +1,7 @@
 from functools import lru_cache
 
 from pydantic import BaseSettings, Field
-
+from typing import Optional
 
 @lru_cache
 def get_env():
@@ -11,20 +11,17 @@ def get_env():
 class EnvSettings(BaseSettings):
     allow_drop_tables: bool = Field(False, env='ALLOW_DROP_TABLES')
 
-    mongo_db: str = Field(..., env='POSTGRES_DB')
-    mongo_user: str = Field(..., env='POSTGRES_USER')
-    mongo_password: str = Field(..., env='POSTGRES_PASSWORD')
-    mongo_host: str = Field(..., env='POSTGRES_HOST')
-    mongo_port: str = Field(..., env='POSTGRES_PORT')
+    mongo_db: str
+    mongo_user: str
+    mongo_auth_db: Optional[str] = None
+    mongo_password: str
+    mongo_host: str
+    mongo_port: int
+    mongo_min_connections: int
+    mongo_max_connections: int
 
+    # mongo_seed_collection: str
+    mongo_seed_json: str
     # postgres_dsn: PostgresDsn = None
     # postgres_asyncpg_dsn: PostgresAsyncDsn = None
 
-
-class TestP(BaseSettings):
-    x: int
-    y: int
-    z: int
-
-    def __post_init__(self):
-        self.z = self.x + self.y
