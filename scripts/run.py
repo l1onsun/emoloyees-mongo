@@ -1,30 +1,68 @@
 import fire
 import subprocess
 from typing import Literal
-from config.environ import get_env
+import asyncio
+import dotenv
 
+from database.manage import create_employee_index, import_employee_json, drop_employee
 
-class DatabaseRunner():
-    def seed(self):
-        env = get_env()
-        subprocess.run(["mongoimport", "--db", env.mongo_db,
-                        "--collection", env.mongo_employee_collection, "--file", env.mongo_seed_json, "--jsonArray"])
+ENVS = {
+    "dev": "dotenv/.env.dev",
+    "prod": "dotenv/.env.prod",
+    "docker": "dotenv/.env.docker",
+}
 
 
 class MainRunner():
-    def __init__(self, mode: Literal["dev", "prod"]):
-        assert mode in {"dev", "prod"}
+    def __init__(self, mode: Literal["dev", "prod", "docker"]):
+        assert mode in ENVS.keys()
+        dotenv.load_dotenv(ENVS[mode])
         self._mode = mode
 
-    def up(self):
+    def start(self):
         if self._mode == "dev":
             subprocess.run(["uvicorn", "app.main:app", "--reload"])
-        elif self._mode == "prod":
+        elif self._mode in {"prod", "docker"}:
             subprocess.run(["gunicorn", "app.main:app",
                             "-k", "uvicorn.workers.UvicornWorker", "-c", "config/gunicorn_conf.py"])
+        return self
 
-    def db(self):
-        return
+    def build(self):
+        assert self._mode == "docker"
+        subprocess.run(["docker-compose", "build"])
+        return self
+
+    def up(self):
+        assert self._mode == "docker"
+        subprocess.run(["docker-compose", "up"])
+        return self
+
+    def database(self):
+        return DatabaseRunner()
+
+    def __call__(self):
+        pass
+
+
+class DatabaseRunner():
+    def __init__(self):
+        self._loop = asyncio.new_event_loop()
+
+    def drop(self):
+        self._loop.run_until_complete(drop_employee())
+        return self
+
+    def seed(self):
+        self._loop.run_until_complete(import_employee_json())
+        return self
+
+    def create_index(self):
+        self._loop.run_until_complete(create_employee_index())
+        return self
+
+    def __call__(self):
+        self._loop.close()
+        pass
 
 
 if __name__ == '__main__':
