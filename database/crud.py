@@ -4,14 +4,14 @@ from database.scheme import Constants
 
 
 async def find_employee(db: AsyncIOMotorDatabase,
-                        name: List[str] = None, job: List[str] = None, company: List[str] = None):
+                        names: List[str] = None, jobs: List[str] = None, companies: List[str] = None):
     employee = db[Constants.employee]
     query = {}
-    if name:
-        query[Constants.name] = {"$in": name}
-    if job:
-        query[Constants.job_title] = {"$in": job}
-    if company:
-        query[Constants.company] = {"$in": company}
+    if names:
+        query[Constants.name] = {"$in": names}
+    if jobs:
+        query[Constants.job_title] = {"$in": jobs}
+    if companies:
+        query[Constants.company] = {"$in": companies}
     cursor = employee.find(query)
     return await cursor.to_list(None)

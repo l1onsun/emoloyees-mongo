@@ -25,4 +25,4 @@ async def get_employee(name: List[safe_str] = Query([]),
                        job: List[safe_str] = Query([]),
                        company: List[safe_str] = Query([]),
                        db=Depends(get_database)):
-    return await crud.find_employee(db, name=name, job=job, company=company)
+    return await crud.find_employee(db, names=name, jobs=job, companies=company)
