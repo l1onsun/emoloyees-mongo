@@ -1,12 +1,21 @@
-FROM python:3.8-slim
+FROM python:3.9-slim
 
-# ENV IN_DOCKER=True
 ENV WORKDIR=/app
+WORKDIR $WORKDIR
+
+# for httptools and uvloop
+RUN apt-get update && apt-get install -y gcc make
+RUN pip install pipenv
+
+COPY Pipfile $WORKDIR/Pipfile
+COPY Pipfile.lock $WORKDIR/Pipfile.lock
+RUN pipenv sync
 
 COPY app $WORKDIR/app
-WORKDIR config $WORKDIR/config
+COPY config $WORKDIR/config
+COPY database $WORKDIR/database
+COPY dotenv $WORKDIR/dotenv
+COPY scripts $WORKDIR/scripts
+COPY employees.json $WORKDIR/employees.json
 
-RUN pip install pipenv
-RUN pipenv install --system --deploy --ignore-pipfile
-
-CMD ["sh", "docker_cmd.sh"]
+CMD pipenv run docker start
