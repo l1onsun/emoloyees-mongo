@@ -3,6 +3,7 @@ import subprocess
 from typing import Literal
 import asyncio
 import dotenv
+import os
 
 from database.manage import create_employee_index, import_employee_json, drop_employee
 
@@ -21,7 +22,7 @@ class MainRunner():
 
     def start(self):
         if self._mode == "dev":
-            subprocess.run(["uvicorn", "app.main:app", "--reload"])
+            subprocess.run(["uvicorn", "app.main:app", "--reload", "--port", os.getenv("GUNICORN_PORT")])
         elif self._mode in {"prod", "docker"}:
             subprocess.run(["gunicorn", "app.main:app",
                             "-k", "uvicorn.workers.UvicornWorker", "-c", "config/gunicorn_conf.py"])
@@ -39,6 +40,12 @@ class MainRunner():
 
     def database(self):
         return DatabaseRunner()
+
+    def pytest(self, test_running: bool = False):
+        cmd = ["python", "-m", "pytest"]
+        if not test_running:
+            cmd.append("--ignore=tests/integration")
+        subprocess.run(cmd)
 
     def __call__(self):
         pass
