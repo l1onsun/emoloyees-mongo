@@ -14,7 +14,7 @@ async def import_employee_json():
     with open(get_env().mongo_seed_json) as f:
         data = json.load(f)
     # validate
-    data = [EmployeeScheme(**js).dict() for js in data]
+    data = [EmployeeScheme(**js).dict(by_alias=True) for js in data]
     await employee.insert_many(data)
 
 
