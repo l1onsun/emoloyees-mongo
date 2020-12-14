@@ -1,17 +1,17 @@
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import List
-from database.scheme import Scheme
+from database.scheme import Constants
 
 
 async def find_employee(db: AsyncIOMotorDatabase,
                         name: List[str] = None, job: List[str] = None, company: List[str] = None):
-    employee = db[Scheme.employee]
+    employee = db[Constants.employee]
     query = {}
     if name:
-        query[Scheme.name] = {"$in": name}
+        query[Constants.name] = {"$in": name}
     if job:
-        query[Scheme.job_title] = {"$in": job}
+        query[Constants.job_title] = {"$in": job}
     if company:
-        query[Scheme.company] = {"$in": company}
+        query[Constants.company] = {"$in": company}
     cursor = employee.find(query)
     return await cursor.to_list(None)

@@ -3,7 +3,8 @@ from datetime import datetime
 from typing import Literal
 
 
-
+# It's not optimal to store constant names this way.
+# But i decided, that using ODM like μMongo or writing ODM by self is overkill for small task.
 
 # constants
 class Constants:
@@ -18,7 +19,7 @@ class Constants:
     salary = "salary"
     indexes = [(company, 1), (job_title, 1), (name, 1)]
 
-
+# validate data, that will be stored in mongo
 class EmployeeScheme(BaseModel):
     name: str
     email: EmailStr
@@ -28,13 +29,3 @@ class EmployeeScheme(BaseModel):
     job_title: str
     gender: Literal["male", "female", "other"]
     salary: int
-
-    # class Config:
-    #     fields = {'name': Scheme.name,
-    #               'email': Scheme.email,
-    #               'age': Scheme.age,
-    #               'company': Scheme.company,
-    #               'join_date': Scheme.join_date,
-    #               'job': Scheme.job_title,
-    #               'gender': Scheme.gender,
-    #               'salary': Scheme.salary}
