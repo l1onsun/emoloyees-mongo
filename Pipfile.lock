@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fceeb8b13b9348fb4b831c3d1c465345d0ccad60cbde5bd708e768d6a2ecb20b"
+            "sha256": "4cbe97398a5fdf6551cadeaf72f3c78923bc39672334e88e689c7bba3df3e424"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -24,6 +24,32 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==7.1.2"
         },
+        "devtools": {
+            "extras": [
+                "pygments"
+            ],
+            "hashes": [
+                "sha256:7334183972a8d04e81d08b7f62126abca9b6f4de51d825c5fdcb9c88f252601a",
+                "sha256:a054307594d35d28fae8df7629967363e851ae0ac7b2152640a8a401c39d42d7"
+            ],
+            "index": "pypi",
+            "version": "==0.6.1"
+        },
+        "dnspython": {
+            "hashes": [
+                "sha256:044af09374469c3a39eeea1a146e8cac27daec951f1f1f157b1962fc7cb9d1b7",
+                "sha256:40bb3c24b9d4ec12500f0124288a65df232a3aa749bb0c39734b782873a2544d"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==2.0.0"
+        },
+        "email-validator": {
+            "hashes": [
+                "sha256:094b1d1c60d790649989d38d34f69e1ef07792366277a2cf88684d03495d018f",
+                "sha256:1a13bd6050d1db4475f13e444e169b6fe872434922d38968c67cea9568cce2f0"
+            ],
+            "version": "==1.1.2"
+        },
         "fastapi": {
             "hashes": [
                 "sha256:62074dd38541d9d7245f3aacbbd0d44340c53d56186c9b249d261a18dad4874b",
@@ -38,6 +64,14 @@
             ],
             "index": "pypi",
             "version": "==0.3.1"
+        },
+        "gunicorn": {
+            "hashes": [
+                "sha256:1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626",
+                "sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c"
+            ],
+            "index": "pypi",
+            "version": "==20.0.4"
         },
         "h11": {
             "hashes": [
@@ -63,7 +97,26 @@
             ],
             "version": "==0.1.1"
         },
+        "idna": {
+            "hashes": [
+                "sha256:b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6",
+                "sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==2.10"
+        },
+        "motor": {
+            "hashes": [
+                "sha256:428d94750123d19fcd0a89b8671ff9b4656f205217bad9f44161748c64c5fc80",
+                "sha256:f1692b760d834707e3477996ce8d407af8cd61c1a2abedbf81c22ef14675e61a"
+            ],
+            "index": "pypi",
+            "version": "==2.3.0"
+        },
         "pydantic": {
+            "extras": [
+                "email"
+            ],
             "hashes": [
                 "sha256:025bf13ce27990acc059d0c5be46f416fc9b293f45363b3d19855165fee1874f",
                 "sha256:185e18134bec5ef43351149fe34fda4758e53d05bb8ea4d5928f0720997b79ef",
@@ -88,8 +141,15 @@
                 "sha256:f6864844b039805add62ebe8a8c676286340ba0c6d043ae5dea24114b82a319e",
                 "sha256:ffd180ebd5dd2a9ac0da4e8b995c9c99e7c74c31f985ba090ee01d681b1c4b95"
             ],
-            "markers": "python_version >= '3.6'",
+            "index": "pypi",
             "version": "==1.7.3"
+        },
+        "pygments": {
+            "hashes": [
+                "sha256:ccf3acacf3782cbed4a989426012f1c535c9a90d3a7fc3f16d231b9372d2b716",
+                "sha256:f275b6c0909e5dafd2d6269a656aa90fa58ebf4a74f8fcf9053195d226b24a08"
+            ],
+            "version": "==2.7.3"
         },
         "pymongo": {
             "hashes": [
@@ -268,13 +328,5 @@
             "version": "==8.1"
         }
     },
-    "develop": {
-        "debug-tools": {
-            "hashes": [
-                "sha256:e1c15ef43ff00f816e79c280a731e5e64f1e6b3e69593e55f2336c41fc95b148"
-            ],
-            "index": "pypi",
-            "version": "==2.6.20"
-        }
-    }
+    "develop": {}
 }

@@ -1,7 +1,7 @@
 [scripts]
-dev = "PIPENV_DOTENV_LOCATION=dotenv/.env.dev pipenv run python -m scripts.run --mode=dev"
-prod = "PIPENV_DOTENV_LOCATION=dotenv/.env.prod pipenv run python -m scripts.run --mode=prod"
-indocker-up = "python -m scripts.run --mode=prod"
+dev = "python -m scripts.run --mode=dev"
+prod = "python -m scripts.run --mode=prod"
+docker = "python -m scripts.run --mode=docker"
 
 [[source]]
 url = "https://pypi.org/simple"
@@ -13,9 +13,12 @@ fastapi = "*"
 pymongo = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 fire = "*"
+motor = "*"
+gunicorn = "*"
+pydantic = {extras = ["email"], version = "*"}
+devtools = {extras = ["pygments"], version = "*"}
 
 [dev-packages]
-debug-tools = "*"
 
 [requires]
 python_version = "3.9"
