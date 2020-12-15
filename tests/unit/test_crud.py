@@ -5,7 +5,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from database.main import get_database
 from database.manage import import_employee_json, drop_employee, create_employee_index
 from database.crud import find_employee
-from database.scheme import Constants
+from database.scheme import SchemeConfig
 
 
 # redefine event_loop to `module` scope
@@ -29,8 +29,8 @@ async def seeded_database() -> AsyncIOMotorDatabase:
 async def test_get_all(seeded_database: AsyncIOMotorDatabase):
     employee_list = await find_employee(seeded_database)
     assert len(employee_list) == 600
-    fields = {Constants.name, Constants.company, Constants.job_title, Constants.salary, Constants.gender,
-              Constants.join_date, Constants.age, Constants.email}
+    fields = {SchemeConfig.employee_name, SchemeConfig.employee_company, SchemeConfig.employee_job_title, SchemeConfig.employee_salary, SchemeConfig.employee_gender,
+              SchemeConfig.employee_join_date, SchemeConfig.employee_age, SchemeConfig.employee_email}
     for emp in employee_list:
         assert len(emp.keys()) == len(fields) + 1  # +1 is ObjectID
         for field in fields:
