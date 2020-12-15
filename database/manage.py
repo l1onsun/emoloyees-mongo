@@ -1,16 +1,16 @@
 import json
 from config.environ import get_env
 from database.main import get_database
-from database.scheme import Constants, EmployeeScheme
+from database.scheme import SchemeConfig, EmployeeScheme
 
 
 async def drop_employee():
-    employee = get_database()[Constants.employee]
+    employee = get_database()[SchemeConfig.collection_employee]
     await employee.drop()
 
 
 async def import_employee_json():
-    employee = get_database()[Constants.employee]
+    employee = get_database()[SchemeConfig.collection_employee]
     with open(get_env().mongo_seed_json) as f:
         data = json.load(f)
     # validate
@@ -19,5 +19,5 @@ async def import_employee_json():
 
 
 async def create_employee_index():
-    employee = get_database()[Constants.employee]
-    await employee.create_index(Constants.indexes)
+    employee = get_database()[SchemeConfig.collection_employee]
+    await employee.create_index(SchemeConfig.employee_indexes)

@@ -1,14 +1,14 @@
 import pytest
 from httpx import AsyncClient
 from app.main import app, get_database, ApiEmployee
-from database.scheme import Constants
+from database.scheme import SchemeConfig
 from datetime import datetime
 
 # strange test, but for example
 
 class FakeDB:
     def __getitem__(self, item):
-        assert item == Constants.employee
+        assert item == SchemeConfig.collection_employee
         return FakeCollection()
 
 
